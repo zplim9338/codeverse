@@ -45,7 +45,12 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
+## Installed Package
 
-#### #######################################################################################################################################################################################################################
 1. yarn add @arco-design/web-react
 2. yarn add react-router-dom
+3. yarn add --dev --exact prettier
+
+## Run Prettier: You can run Prettier manually via the command line to format your code:
+
+yarn prettier --write .

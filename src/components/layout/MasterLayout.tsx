@@ -5,6 +5,7 @@ import MasterSidebarMenu from '../sidebar/MasterSidebarMenu'
 import { Link, Route, Routes, useNavigate } from 'react-router-dom'
 import Home from '../../pages/Home'
 import Test from '../../pages/Test'
+import './MasterLayout.css'; 
 
 const Sider = Layout.Sider
 const Header = Layout.Header
@@ -23,51 +24,48 @@ const MasterLayout: React.FC = () => {
   }
 
   return (
-    <div>
-      <Layout className='layout-collapse-demo'>
-        <Sider
-          collapsed={collapsed}
-          collapsible
-          trigger={null}
-          breakpoint='xl'
-          style={{ height: '100vh' }}
-        >
-          <MasterSidebarMenu />
-        </Sider>
+    <Layout className='layout-collapse-demo'>
+      <Sider
+        collapsed={collapsed}
+        collapsible
+        trigger={null}
+        breakpoint='xl'
+      >
+        <MasterSidebarMenu />
+      </Sider>
+      <Layout>
+        <Header>
+          <MasterHeader
+            collapsed={collapsed}
+            handleCollapsed={handleCollapsed}
+          />
+        </Header>
         <Layout>
-          <Header>
-            <MasterHeader
-              collapsed={collapsed}
-              handleCollapsed={handleCollapsed}
-            />
-          </Header>
-          <Layout>
-            <Breadcrumb style={{ margin: '16px 0' }}>
-              <Breadcrumb.Item>
-                <Link to='/'>Home</Link>
-              </Breadcrumb.Item>
-              <Breadcrumb.Item>List</Breadcrumb.Item>
-              <Breadcrumb.Item>
-                <Link to='/test'>Test</Link>
-              </Breadcrumb.Item>
-            </Breadcrumb>
-            <Content>
-              <Button type='primary' onClick={() => goToPage('/')}>
-                Back To Home
-              </Button>
-              <Button type='primary' onClick={() => goToPage('/test')}>
-                Test
-              </Button>
-              <Routes>
-                <Route path='/' element={<Home username={username} />} />
-                <Route path='/test' element={<Test username={username} />} />
-              </Routes>
-            </Content>
-            <Footer>FOOTER</Footer>
-          </Layout>
+          <Breadcrumb style={{ margin: '16px 0' }}>
+            <Breadcrumb.Item>
+              <Link to='/'>Home</Link>
+            </Breadcrumb.Item>
+            <Breadcrumb.Item>List</Breadcrumb.Item>
+            <Breadcrumb.Item>
+              <Link to='/test'>Test</Link>
+            </Breadcrumb.Item>
+          </Breadcrumb>
+          <Content>
+            <Button type='primary' onClick={() => goToPage('/')}>
+              Back To Home
+            </Button>
+            <Button type='primary' onClick={() => goToPage('/test')}>
+              Test
+            </Button>
+            <Routes>
+              <Route path='/' element={<Home username={username} />} />
+              <Route path='/test' element={<Test username={username} />} />
+            </Routes>
+          </Content>
+          <Footer>FOOTER</Footer>
         </Layout>
       </Layout>
-    </div>
+    </Layout>
   )
 }
 

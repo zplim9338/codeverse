@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { Layout, Menu, Breadcrumb, Button } from '@arco-design/web-react'
+import { Layout, Breadcrumb } from '@arco-design/web-react'
 import MasterHeader from '../header/MasterHeader'
 import MasterSidebarMenu from '../sidebar/MasterSidebarMenu'
 import { Link, Route, Routes, useNavigate } from 'react-router-dom'
 import Home from '../../pages/Home'
 import Test from '../../pages/Test'
-import './MasterLayout.css'; 
+import './MasterLayout.css'
 
 const Sider = Layout.Sider
 const Header = Layout.Header
@@ -25,12 +25,7 @@ const MasterLayout: React.FC = () => {
 
   return (
     <Layout className='layout-collapse-demo'>
-      <Sider
-        collapsed={collapsed}
-        collapsible
-        trigger={null}
-        breakpoint='xl'
-      >
+      <Sider collapsed={collapsed} collapsible trigger={null} breakpoint='xl'>
         <MasterSidebarMenu />
       </Sider>
       <Layout>
@@ -51,18 +46,12 @@ const MasterLayout: React.FC = () => {
             </Breadcrumb.Item>
           </Breadcrumb>
           <Content>
-            <Button type='primary' onClick={() => goToPage('/')}>
-              Back To Home
-            </Button>
-            <Button type='primary' onClick={() => goToPage('/test')}>
-              Test
-            </Button>
             <Routes>
               <Route path='/' element={<Home username={username} />} />
               <Route path='/test' element={<Test username={username} />} />
             </Routes>
           </Content>
-          <Footer>FOOTER</Footer>
+          <Footer>Developed By: Lim Zhong Peng</Footer>
         </Layout>
       </Layout>
     </Layout>

@@ -6,22 +6,17 @@ import './Login.css'
 const Login: React.FC = () => {
   return (
     <div className='login-content'>
-      <Space size='medium' style={{ padding: 10 }} direction='vertical'>
-        <Card title='Login' style={{ textAlign: 'left' }}>
-          <p>Username/Email:</p>
-          <Input type='text' name='loginId' placeholder='Username/Email' />
-          <p>Password:</p>
-          <Input.Password placeholder='Password' />
-          <div style={{ textAlign: 'right' }}>
-            <Link>Forgot password?</Link>
-          </div>
+        <Card className='transparent-card' title='Login'>
+          <Space direction='vertical'>
+            <Input type='text' name='loginId' placeholder='Username/Email' />
+            <Input.Password placeholder='Password' />
+            <div style={{ textAlign: 'right' }}>
+              <Link hoverable={false}>Forgot password?</Link>
+            </div>
+            <Button shape='round' long>Login</Button>
+            <p>Don't have an account? <Link hoverable={false}>Register</Link></p>
+          </Space>        
         </Card>
-        <Space direction='horizontal'>
-          <Button>Login</Button>
-          <p>or</p>
-          <Link>Sign Up</Link>
-        </Space>
-      </Space>
     </div>
   )
 }

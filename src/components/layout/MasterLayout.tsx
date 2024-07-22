@@ -2,9 +2,7 @@ import React, { useState } from 'react'
 import { Layout, Breadcrumb } from '@arco-design/web-react'
 import MasterHeader from '../header/MasterHeader'
 import MasterSidebarMenu from '../sidebar/MasterSidebarMenu'
-import { Link, Route, Routes, useNavigate } from 'react-router-dom'
-import Home from '../../pages/Home'
-import Test from '../../pages/Test'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
 import './MasterLayout.css'
 
 const Sider = Layout.Sider
@@ -13,7 +11,6 @@ const Footer = Layout.Footer
 const Content = Layout.Content
 
 const MasterLayout: React.FC = () => {
-  const username = 'John Doe'
   const [collapsed, setCollapsedStatus] = useState(false)
   const navigate = useNavigate()
   const handleCollapsed = () => {
@@ -46,10 +43,7 @@ const MasterLayout: React.FC = () => {
             </Breadcrumb.Item>
           </Breadcrumb>
           <Content>
-            <Routes>
-              <Route path='/' element={<Home username={username} />} />
-              <Route path='/test' element={<Test username={username} />} />
-            </Routes>
+            <Outlet />
           </Content>
           <Footer>Developed By: Lim Zhong Peng</Footer>
         </Layout>

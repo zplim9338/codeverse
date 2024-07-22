@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import { Layout, Breadcrumb } from '@arco-design/web-react'
-import Login from '../../pages/Login/Login'
+import React, { useState, ReactNode } from 'react'
+import { Layout } from '@arco-design/web-react'
 import './GuestLayout.css'
+import { Outlet } from 'react-router-dom'
 
 const Footer = Layout.Footer
 const Content = Layout.Content
@@ -11,7 +11,7 @@ const GuestLayout: React.FC = () => {
     <div className='layout-basic-demo'>
       <Layout style={{ height: '100vh' }}>
         <Content>
-          <Login />
+          <Outlet />
         </Content>
         <Footer>Developed By: Lim Zhong Peng</Footer>
       </Layout>

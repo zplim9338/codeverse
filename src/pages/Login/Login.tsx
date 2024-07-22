@@ -2,8 +2,14 @@ import { Button, Input, Link, Space } from '@arco-design/web-react'
 import React from 'react'
 import { Card } from '@arco-design/web-react'
 import './Login.css'
+import { useNavigate } from 'react-router-dom'
 
 const Login: React.FC = () => {
+  const navigate = useNavigate()
+
+  const goToPage = (pagePath: string) => {
+    navigate(pagePath)
+  }
   return (
     <div className='login-content'>
         <Card className='transparent-card' title='Login'>
@@ -14,7 +20,7 @@ const Login: React.FC = () => {
               <Link hoverable={false}>Forgot password?</Link>
             </div>
             <Button shape='round' long>Login</Button>
-            <p>Don't have an account? <Link hoverable={false}>Register</Link></p>
+            <p>Don't have an account? <Link hoverable={false} onClick={() => goToPage('/Register')}>Register</Link></p>
           </Space>        
         </Card>
     </div>

@@ -1,8 +1,22 @@
-.layout-basic-demo .arco-layout-header,
-.layout-basic-demo .arco-layout-footer,
-.layout-basic-demo .arco-layout-sider,
-.layout-basic-demo .arco-layout-sider-children,
-.layout-basic-demo .arco-layout-content {
+.layout-guest .arco-layout-header,
+.layout-guest .arco-layout-footer,
+.layout-guest .arco-layout-sider,
+.layout-guest .arco-layout-sider-children,
+.layout-guest .arco-layout-content {
+  /* color: var(--color-white);
+  text-align: center;
+  font-stretch: condensed;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; */
+}
+
+/* .layout-guest .arco-layout-header, */
+.layout-guest .arco-layout-footer {
+  height: 64px;
+  background-color: rgba(255, 255, 255, 0.2); /* 50% transparent white background */
+  backdrop-filter: blur(10px); /* Blur effect*/
   color: var(--color-white);
   text-align: center;
   font-stretch: condensed;
@@ -11,22 +25,17 @@
   flex-direction: column;
   justify-content: center;
 }
-/* .layout-basic-demo .arco-layout-header, */
-.layout-basic-demo .arco-layout-footer {
-  height: 64px;
-  background-color: rgba(255, 255, 255, 0.2); /* 50% transparent white background */
-  backdrop-filter: blur(10px); /* Blur effect*/
-}
-.layout-basic-demo .arco-layout-sider {
+
+.layout-guest .arco-layout-sider {
   width: 206px;
   background-color: var(--color-primary-light-3);
 }
-.layout-basic-demo .arco-layout-content {
 
-  
+.layout-guest .arco-layout-content {
+
 }
 
-.layout-basic-demo{
+.layout-guest{
   /* background-color: rgb(var(--arcoblue-6)); */
   background-image: url('/src/assets/images/wallpaper2.jpg');
   background-size:cover;

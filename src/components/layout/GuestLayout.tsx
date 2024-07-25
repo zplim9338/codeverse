@@ -8,7 +8,7 @@ const Content = Layout.Content
 
 const GuestLayout: React.FC = () => {
   return (
-    <div className='layout-basic-demo'>
+    <div className='layout-guest'>
       <Layout style={{ height: '100vh' }}>
         <Content>
           <Outlet />

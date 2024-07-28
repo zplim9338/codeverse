@@ -37,7 +37,7 @@
 
 .layout-guest{
   /* background-color: rgb(var(--arcoblue-6)); */
-  background-image: url('/src/assets/images/wallpaper2.jpg');
+  background-image: url('/src/assets/images/wallpapers/wallpaper1.jpg');
   background-size:cover;
   background-position: center;
 }

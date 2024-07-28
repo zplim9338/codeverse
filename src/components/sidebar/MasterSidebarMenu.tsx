@@ -1,5 +1,5 @@
 import React from 'react'
-import { Menu, Message } from '@arco-design/web-react'
+import { Divider, Menu, Message } from '@arco-design/web-react'
 import { IconHome, IconCalendar } from '@arco-design/web-react/icon'
 
 const MenuItem = Menu.Item
@@ -9,6 +9,7 @@ const MasterSidebarMenu: React.FC = () => {
   return (
     <div>
       <div className='logo' />
+      <Divider style={{ margin: '4px 0' }} />
       <Menu
         defaultOpenKeys={['1']}
         defaultSelectedKeys={['0_3']}

@@ -1,9 +1,9 @@
+import './MasterLayout.css'
 import React, { useState } from 'react'
 import { Layout, Breadcrumb } from '@arco-design/web-react'
 import MasterHeader from '../header/MasterHeader'
 import MasterSidebarMenu from '../sidebar/MasterSidebarMenu'
-import { Link, Outlet, useNavigate } from 'react-router-dom'
-import './MasterLayout.css'
+import { Link, Outlet } from 'react-router-dom'
 
 const Sider = Layout.Sider
 const Header = Layout.Header
@@ -12,27 +12,20 @@ const Content = Layout.Content
 
 const MasterLayout: React.FC = () => {
   const [collapsed, setCollapsedStatus] = useState(false)
-  const navigate = useNavigate()
   const handleCollapsed = () => {
     setCollapsedStatus(!collapsed)
-  }
-  const goToPage = (pagePath: string) => {
-    navigate(pagePath)
   }
 
   return (
     <Layout className='layout-collapse-demo'>
-      <Sider collapsed={collapsed} collapsible trigger={null} breakpoint='xl'>
-        <MasterSidebarMenu />
-      </Sider>
+        <Sider collapsed={collapsed} onCollapse={handleCollapsed} collapsible breakpoint='xl'> {/*trigger={null} */}
+          <MasterSidebarMenu />
+        </Sider>
       <Layout>
         <Header>
-          <MasterHeader
-            collapsed={collapsed}
-            handleCollapsed={handleCollapsed}
-          />
+          <MasterHeader />
         </Header>
-        <Layout>
+        <Layout style={{ padding: '0 24px' }}>
           <Breadcrumb style={{ margin: '16px 0' }}>
             <Breadcrumb.Item>
               <Link to='/'>Home</Link>
@@ -42,7 +35,7 @@ const MasterLayout: React.FC = () => {
               <Link to='/test'>Test</Link>
             </Breadcrumb.Item>
           </Breadcrumb>
-          <Content>
+          <Content style={{ padding: '0 24px' }}>
             <Outlet />
           </Content>
           <Footer>Developed By: Lim Zhong Peng</Footer>

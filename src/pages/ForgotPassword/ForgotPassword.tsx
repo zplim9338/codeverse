@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Button, Space, Image } from '@arco-design/web-react'
 import './ForgotPassword.css'
-import imgCodingConstruction from '../../assets/images/coding_construction.png'; // Adjust the path as necessary
+import imgCodingConstruction from '../../assets/images/icon/coding_construction.png'; // Adjust the path as necessary
 
 const Register: React.FC = () => { 
   const navigate = useNavigate()

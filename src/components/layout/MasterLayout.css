@@ -56,7 +56,6 @@
   margin-left: 20px;
 }
 
-
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -87,4 +86,3 @@
     color: var(--color-text-1);
   }
 }
-

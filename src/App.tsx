@@ -12,7 +12,7 @@ import Test from './pages/Test'
 
 const App: React.FC = () => {
   const username = 'John Doe'
-  
+
   return (
     <Router>
       <Routes>
@@ -23,11 +23,11 @@ const App: React.FC = () => {
           <Route path='/register' element={<Register />} />
           <Route path='/forgot-password' element={<ForgotPassword />} />
         </Route>
-            
+
         {/* MasterLayout */}
         <Route element={<MasterLayout />}>
           <Route path='/home' element={<Home username={username} />} />
-          <Route path='/test' element={<Test username={username} />} />    
+          <Route path='/test' element={<Test username={username} />} />
         </Route>
       </Routes>
     </Router>

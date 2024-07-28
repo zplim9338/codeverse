@@ -1,7 +1,32 @@
-semi: false                # Avoids inserting semicolons at the end of statements
-singleQuote: true          # Enforces the use of single quotes for strings
-tabWidth: 2                # Sets the number of spaces per indentation level
-printWidth: 80             # Sets the line length that Prettier will wrap code at
-jsxSingleQuote: true       # Enforces single quotes for JSX attributes
-trailingComma: es5         # Adds trailing commas where valid in ES5 (e.g., in arrays and objects)
-arrowParens: always        # Enforces parentheses around a single arrow function parameter
+# Maximum line length for code
+printWidth: 80
+
+# Use single quotes instead of double quotes
+singleQuote: true
+
+# Enforces single quotes for JSX attributes
+jsxSingleQuote: true
+
+# Use semicolons at the end of statements
+semi: false
+
+# Include parentheses around a sole arrow function parameter
+arrowParens: always
+
+# Use spaces for indentation
+useTabs: false
+
+# Number of spaces per indentation level
+tabWidth: 2
+
+# Print trailing commas wherever possible when multi-line
+trailingComma: es5
+
+# Print spaces between brackets in object literals
+bracketSpacing: true
+
+# Put the > of a multi-line JSX element at the end of the last line instead of being alone on the next line
+jsxBracketSameLine: false
+
+# Control how Prettier formats end of line
+endOfLine: lf

@@ -15,7 +15,12 @@
 /* .layout-guest .arco-layout-header, */
 .layout-guest .arco-layout-footer {
   height: 64px;
-  background-color: rgba(255, 255, 255, 0.2); /* 50% transparent white background */
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.2
+  ); /* 50% transparent white background */
   backdrop-filter: blur(10px); /* Blur effect*/
   color: var(--color-white);
   text-align: center;
@@ -32,12 +37,11 @@
 }
 
 .layout-guest .arco-layout-content {
-
 }
 
-.layout-guest{
+.layout-guest {
   /* background-color: rgb(var(--arcoblue-6)); */
   background-image: url('/src/assets/images/wallpapers/wallpaper1.jpg');
-  background-size:cover;
+  background-size: cover;
   background-position: center;
 }

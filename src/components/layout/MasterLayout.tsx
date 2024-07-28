@@ -18,9 +18,16 @@ const MasterLayout: React.FC = () => {
 
   return (
     <Layout className='layout-collapse-demo'>
-        <Sider collapsed={collapsed} onCollapse={handleCollapsed} collapsible breakpoint='xl'> {/*trigger={null} */}
-          <MasterSidebarMenu />
-        </Sider>
+      <Sider
+        collapsed={collapsed}
+        onCollapse={handleCollapsed}
+        collapsible
+        breakpoint='xl'
+      >
+        {' '}
+        {/*trigger={null} */}
+        <MasterSidebarMenu />
+      </Sider>
       <Layout>
         <Header>
           <MasterHeader />

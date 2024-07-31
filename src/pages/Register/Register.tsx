@@ -1,29 +1,52 @@
 import { useRef, useEffect, useState } from 'react'
-import { Form, Input, Button, Card, Link } from '@arco-design/web-react'
+import {
+  Form,
+  Input,
+  Button,
+  Card,
+  Link,
+  Message,
+} from '@arco-design/web-react'
 import { useNavigate } from 'react-router-dom'
-import './Register.css'
 import { RegistrationForm } from '../../models/RegistrationForm'
+import { RegisterUserRequest } from '../../api/userTypes'
+import { registerUser } from '../../api/userService'
+import './Register.css'
 
 const FormItem = Form.Item
 
 const Register: React.FC = () => {
-  // const formRef = useRef<any>();
-
-  // const onValuesChange = (
-  //   changeValue: { [key: string]: any },
-  //   values: { [key: string]: any }) => {
-  //   console.log('onValuesChange: ', changeValue, values);
-  // };
-
   const [form] = Form.useForm<RegistrationForm>()
-  const handleSubmit = (values: RegistrationForm) => {
-    console.log(values)
-    // Add your form submission logic here
-  }
   const navigate = useNavigate()
 
   const goToPage = (pagePath: string) => {
     navigate(pagePath)
+  }
+
+  const handleSubmit = async (values: RegistrationForm) => {
+    const data: RegisterUserRequest = {
+      username: values.username,
+      email: values.email,
+      raw_password: values.password,
+      confirm_password: values.confirmPassword,
+    }
+
+    try {
+      const response = await registerUser(data)
+
+      if (response.status === 200) {
+        if (response.data.status) {
+          form.clearFields()
+          Message.success(response.data.message)
+        } else {
+          Message.error(response.data.message)
+        }
+      } else {
+        Message.error(response.data.message)
+      }
+    } catch (error) {
+      Message.error(`${error}`)
+    }
   }
 
   return (

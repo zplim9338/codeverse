@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { loginUser } from '../../api/userService'
 import './Login.css'
 import { LoginRequest } from '../../api/userTypes'
+import { setTokens } from '../../api/tokenService'
 
 const Login: React.FC = () => {
   const navigate = useNavigate()
@@ -16,24 +17,25 @@ const Login: React.FC = () => {
   }
 
   const handleLogin = async () => {
-    const data: LoginRequest = {
+    const req: LoginRequest = {
       login_id: loginId,
       password: password,
     }
 
     try {
-      const response = await loginUser(data)
+      const { status, data } = await loginUser(req)
 
-      if (response.status === 200) {
+      if (status === 200) {
         // Handle successful login, e.g., navigate to home page
-        if (response.data.status) {
+        if (data.status) {
+          setTokens(data.data.access_token, data.data.refresh_token)
           goToPage('/home')
         } else {
-          Message.error(`Login failed: ${response.data.message}`)
+          Message.error(`Login failed: ${data.message}`)
         }
       } else {
         // Handle login error
-        Message.error(`Login failed: ${response.data.message}`)
+        Message.error(`Login failed: ${data.message}`)
       }
     } catch (error) {
       Message.error(`Login error: ${error}`)

@@ -1,0 +1,44 @@
+.header {
+  background-color: #14c9c9;
+  padding: 10px;
+}
+
+.title {
+  color: #fff;
+  margin: 0;
+  text-align: center;
+}
+
+.search-input {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.menu-container {
+  display: flex;
+  overflow-x: auto;
+  width: 100%;
+}
+
+.menu {
+  background: transparent;
+  color: #fff;
+  white-space: nowrap;
+  padding-bottom: 10px;
+}
+
+.content {
+  padding: 10px;
+  overflow-y: scroll;
+  height: 100%;
+  padding-bottom: 30px; /* Add padding to prevent content from being hidden behind the button */
+}
+
+.order-button {
+  width: 100%;
+  background-color: #14c9c9;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+}

@@ -4,6 +4,7 @@ import '@arco-design/web-react/dist/css/arco.css'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import MasterLayout from './components/layout/MasterLayout'
 import GuestLayout from './components/layout/GuestLayout'
+import OrderFoodLayout from './components/layout/OrderFoodLayout'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import ForgotPassword from './pages/ForgotPassword'
@@ -28,6 +29,10 @@ const App: React.FC = () => {
         <Route element={<MasterLayout />}>
           <Route path='/home' element={<Home username={username} />} />
           <Route path='/test' element={<Test username={username} />} />
+        </Route>
+        {/* OrderFoodLayout */}
+        <Route element={<OrderFoodLayout />}>
+          <Route path='/order-food' />
         </Route>
       </Routes>
     </Router>

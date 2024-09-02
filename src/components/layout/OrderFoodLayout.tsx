@@ -8,10 +8,17 @@ import {
   Button,
   Switch,
   List,
+  Grid,
+  Divider,
+  Drawer,
 } from '@arco-design/web-react'
 import './OrderFoodLayout.css'
+import Meta from '@arco-design/web-react/es/Card/meta'
+import { IconFileImage } from '@arco-design/web-react/icon'
 const { Header, Content } = Layout
 const { Title } = Typography
+const Row = Grid.Row
+const Col = Grid.Col
 
 const mockData = {
   tenantId: 1,
@@ -129,11 +136,134 @@ const mockData = {
   ],
 }
 
+const mockSubData = {
+  itemId: 2,
+  itemName: 'BBQ CHICKEN SET',
+  description: 'BBQ chicken with a choice of sides and a drink.',
+  price: 15.99,
+  mealOptions: [
+    {
+      optionName: 'Main Course Selection',
+      minSelection: 1,
+      maxSelection: 1,
+      items: [
+        {
+          itemId: 1,
+          itemName: 'TERIYAKI CHICKEN',
+          additionalCost: 0,
+          customization: [
+            {
+              customizationName: 'Spicy Level',
+              customizationDescription: 'Choose the spice level for your dish.',
+              options: [
+                {
+                  name: 'Mild',
+                  additionalCost: 0,
+                },
+                {
+                  name: 'Medium',
+                  additionalCost: 0,
+                },
+                {
+                  name: 'Hot',
+                  additionalCost: 0,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          itemId: 3,
+          itemName: 'MUSHROOM SAUCE CHICKEN',
+          additionalCost: 0,
+          customization: [],
+        },
+      ],
+    },
+    {
+      optionName: 'Drink Selection',
+      minSelection: 1,
+      maxSelection: 1,
+      items: [
+        {
+          itemId: 8,
+          itemName: 'SODA',
+          additionalCost: 0,
+          customization: [
+            {
+              customizationName: 'Sugar Level',
+              customizationDescription:
+                'Adjust the amount of sugar in your drink.',
+              options: [
+                {
+                  name: 'No Sugar',
+                  additionalCost: 0,
+                },
+                {
+                  name: 'Half Sugar',
+                  additionalCost: 0,
+                },
+                {
+                  name: 'Full Sugar',
+                  additionalCost: 0,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      optionName: 'Side Dish Selection',
+      minSelection: 0,
+      maxSelection: 2,
+      items: [
+        {
+          itemId: 4,
+          itemName: 'FRENCH FRIES',
+          additionalCost: 0,
+          customization: [],
+        },
+        {
+          itemId: 5,
+          itemName: 'SALAD',
+          additionalCost: 0,
+          customization: [],
+        },
+        {
+          itemId: 6,
+          itemName: 'MASHED POTATOES',
+          additionalCost: 0,
+          customization: [],
+        },
+        {
+          itemId: 7,
+          itemName: 'POTATO WEDGES',
+          additionalCost: 0,
+          customization: [],
+        },
+      ],
+    },
+  ],
+}
+
 const OrderFoodLayout: React.FC = () => {
   const [currentMenu, setCurrentMenu] = useState('1')
   const menuRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const [viewMode, setViewMode] = useState<'card' | 'list'>('card')
+  const [drawerVisible, setDrawerVisible] = useState(false)
+  const [selectedFood, setSelectedFood] = useState<string | null>(null)
+
+  const handleFoodClick = (foodName: string) => {
+    setSelectedFood(foodName)
+    setDrawerVisible(true)
+  }
+
+  const closeDrawer = () => {
+    setDrawerVisible(false)
+    setSelectedFood(null)
+  }
 
   const menuItems = mockData.categories.map((x) => ({
     ...x,
@@ -236,45 +366,71 @@ const OrderFoodLayout: React.FC = () => {
             ))}
           </Menu>
         </div>
-        <div style={{ marginTop: '10px', textAlign: 'center' }}>
+        {/* <div style={{ marginTop: '10px', textAlign: 'center' }}>
           <Switch
             checked={viewMode === 'card'}
             onChange={(checked) => setViewMode(checked ? 'card' : 'list')}
           />
-        </div>
+        </div> */}
       </Header>
 
       <Content className='content' ref={contentRef}>
         {menuItems.map((category) => (
           <div ref={category.ref} key={category.key}>
-            <Card style={{ marginBottom: '10px' }}>
-              <Title heading={6}>{category.categoryName}</Title>
-              {viewMode === 'card' ? (
-                <div style={{ paddingLeft: '20px' }}>
+            <Divider orientation='center' style={{ marginBottom: '10px' }}>
+              {category.categoryName}
+            </Divider>
+            {viewMode === 'card' ? (
+              <div style={{ width: '100%' }}>
+                <Row gutter={24}>
                   {category.items.map((item) => (
-                    <Card key={item.itemId} style={{ marginBottom: '10px' }}>
-                      <div>
-                        <strong>{item.itemName}</strong> - $
-                        {item.price.toFixed(2)}
-                      </div>
-                    </Card>
+                    <Col xs={12} md={6} lg={3}>
+                      <Card
+                        onClick={() => handleFoodClick(item.itemName)}
+                        hoverable
+                        key={item.itemId}
+                        style={{ marginBottom: '10px' }}
+                        cover={
+                          <div
+                            style={{
+                              height: 100,
+                              overflow: 'hidden',
+                              display: 'flex',
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                            }}
+                          >
+                            <IconFileImage
+                              style={{
+                                fontSize: 50,
+                              }}
+                            />
+                          </div>
+                        }
+                      >
+                        <Meta
+                          title={item.itemName}
+                          description={<>${item.price.toFixed(2)}</>}
+                        />
+                      </Card>
+                    </Col>
                   ))}
-                </div>
-              ) : (
-                <List
-                  dataSource={category.items}
-                  render={(item) => (
-                    <List.Item>
-                      <div>
-                        <strong>{item.itemName}</strong> - $
-                        {item.price.toFixed(2)}
-                      </div>
-                    </List.Item>
-                  )}
-                  style={{ paddingLeft: '20px' }}
-                />
-              )}
-            </Card>
+                </Row>
+              </div>
+            ) : (
+              <List
+                dataSource={category.items}
+                render={(item) => (
+                  <List.Item>
+                    <div>
+                      <strong>{item.itemName}</strong> - $
+                      {item.price.toFixed(2)}
+                    </div>
+                  </List.Item>
+                )}
+                style={{ paddingLeft: '20px' }}
+              />
+            )}
           </div>
         ))}
       </Content>
@@ -291,6 +447,19 @@ const OrderFoodLayout: React.FC = () => {
       >
         ORDER NOW
       </Button>
+      <Drawer
+        title={selectedFood}
+        visible={drawerVisible}
+        onCancel={closeDrawer}
+        placement='bottom'
+        height='100%'
+        style={{ borderRadius: '12px 12px 0 0' }}
+      >
+        <div>
+          {/* Add food customization options here */}
+          <p>Customize your {selectedFood}</p>
+        </div>
+      </Drawer>
     </Layout>
   )
 }

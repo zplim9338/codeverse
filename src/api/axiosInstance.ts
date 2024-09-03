@@ -1,4 +1,8 @@
-import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
+import axios, {
+  AxiosResponse,
+  AxiosError,
+  InternalAxiosRequestConfig,
+} from 'axios'
 import {
   clearTokens,
   getAccessToken,
@@ -15,18 +19,25 @@ const axiosInstance = axios.create({
   },
 })
 
-axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
-  const token = getAccessToken()
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`
+// Request Interceptor
+axiosInstance.interceptors.request.use(
+  (config: InternalAxiosRequestConfig) => {
+    const token = getAccessToken()
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
+    return config
+  },
+  (error: AxiosError) => {
+    return Promise.reject(error)
   }
-  return config
-})
+)
 
+// Response Interceptor
 axiosInstance.interceptors.response.use(
   (response: AxiosResponse) => response,
   async (error: AxiosError) => {
-    const originalRequest = error.config as AxiosRequestConfig & {
+    const originalRequest = error.config as InternalAxiosRequestConfig & {
       _retry?: boolean
     }
     if (error.response?.status === 401 && !originalRequest._retry) {

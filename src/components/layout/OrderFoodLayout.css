@@ -42,3 +42,14 @@
   left: 0;
   z-index: 1000;
 }
+
+.order-food-drawer .arco-drawer-content {
+  padding: 0;
+}
+.order-food-drawer .arco-drawer-content .drawer-header {
+  position: 'relative';
+}
+
+.order-food-drawer .arco-drawer-content .drawer-content {
+  padding: 0 16px;
+}

@@ -11,14 +11,18 @@ import {
   Grid,
   Divider,
   Drawer,
+  Checkbox,
+  Radio,
 } from '@arco-design/web-react'
 import './OrderFoodLayout.css'
 import Meta from '@arco-design/web-react/es/Card/meta'
 import { IconFileImage } from '@arco-design/web-react/icon'
+import FoodImage from './../../assets/images/wallpapers/wallpaper1.jpg' // Import your local image
 const { Header, Content } = Layout
-const { Title } = Typography
+const { Title, Paragraph } = Typography
 const Row = Grid.Row
 const Col = Grid.Col
+const RadioGroup = Radio.Group
 
 const mockData = {
   tenantId: 1,
@@ -342,7 +346,7 @@ const OrderFoodLayout: React.FC = () => {
   }, [currentMenu, menuItems])
 
   return (
-    <Layout style={{ height: '100vh' }}>
+    <Layout style={{ height: '100vh' }} className='order-food-layout'>
       <Header className='header'>
         <Title heading={5} className='title'>
           {mockData.tenantName}
@@ -445,19 +449,87 @@ const OrderFoodLayout: React.FC = () => {
           zIndex: 1000,
         }}
       >
-        ORDER NOW
+        Cart
       </Button>
       <Drawer
-        title={selectedFood}
+        title={null} //{selectedFood}
         visible={drawerVisible}
         onCancel={closeDrawer}
         placement='bottom'
         height='100%'
         style={{ borderRadius: '12px 12px 0 0' }}
+        className='order-food-drawer'
       >
-        <div>
-          {/* Add food customization options here */}
-          <p>Customize your {selectedFood}</p>
+        <div className='drawer-header'>
+          <img
+            src={FoodImage}
+            style={{
+              width: '100%',
+              height: '150px',
+              objectFit: 'cover',
+              borderRadius: '12px 12px 0 0',
+            }}
+          />
+        </div>
+        <div className='drawer-content'>
+          <Title heading={6} style={{ margin: 0 }}>
+            {mockSubData.itemName}
+          </Title>
+          <Paragraph>{mockSubData.description}</Paragraph>
+          {mockSubData.mealOptions.map((option) => (
+            <div>
+              <Divider orientation='center' style={{ marginBottom: '10px' }}>
+                {option.optionName}
+              </Divider>
+              <Paragraph style={{ margin: 0 }}>
+                Select {option.maxSelection}
+              </Paragraph>
+              <List
+                size='small'
+                dataSource={option.items}
+                render={(item) => (
+                  <List.Item>
+                    <Checkbox>{item.itemName}</Checkbox>
+                    <br />
+                    {item.customization.map((customization) => (
+                      <div>
+                        {customization.customizationName} (
+                        {customization.customizationDescription})
+                        <br />
+                        <RadioGroup>
+                          {customization.options.map((option, idx) => (
+                            <Radio key={idx} value={option.name}>
+                              {option.name}
+                            </Radio>
+                          ))}
+                        </RadioGroup>
+                      </div>
+                    ))}
+                    {/* options={[
+                        {
+                          label: 'A',
+                          value: 'a',
+                        },
+                        {
+                          label: 'B',
+                          value: 'b',
+                        },
+                        {
+                          label: 'C',
+                          value: 'c',
+                        },
+                        {
+                          label: 'D',
+                          value: 'd',
+                          disabled: true,
+                        },
+                      ]}
+                    /> */}
+                  </List.Item>
+                )}
+              />
+            </div>
+          ))}
         </div>
       </Drawer>
     </Layout>
